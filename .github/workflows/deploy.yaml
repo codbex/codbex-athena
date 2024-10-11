@@ -28,5 +28,5 @@ jobs:
       - name: Deploy to Kubernetes
         run: |
           kubectl scale deployments/codbex-athena --replicas=0 -n prod
-          kubectl set image deployment/codbex-athena codbex-athena=ghcr.io/codbex/codbex-athena:${{ inputs.application-version }} -n prod
+          kubectl set image deployment/codbex-athena codbex-athena=ghcr.io/codbex/codbex-athena-data-sample:${{ inputs.application-version }} -n prod
           kubectl scale deployments/codbex-athena --replicas=1 -n prod
