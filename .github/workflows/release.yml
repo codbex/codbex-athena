@@ -54,6 +54,6 @@ jobs:
     secrets: inherit
   deploy:
     needs: [application, application-data-sample]
-    used: ./.github/workflows/deploy.yaml
+    uses: ./.github/workflows/deploy.yaml
     with:
       application-version: ${{ inputs.release-version }}
