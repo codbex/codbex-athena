@@ -7,6 +7,7 @@
         "@codbex/codbex-accounts": "0.2.0",
         "@codbex/codbex-invoices": "0.5.0",
         "@codbex/codbex-payments": "0.5.0",
+        "@codbex/codbex-number-generator-data": "0.2.0",
         "@codbex/ide-branding": "0.1.0"
     }
 }
