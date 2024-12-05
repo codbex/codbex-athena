@@ -7,7 +7,7 @@
         "@codbex/codbex-invoices": "0.6.0",
         "@codbex/codbex-payments": "0.y.0",
         "@codbex/ide-branding": "0.1.0",
-        "@codbex/codbex-navigation-groups": "0.2.0"
-        "@codbex/codbex-athena-data-sample": "0.2.0",
+        "@codbex/codbex-navigation-groups": "0.2.0",
+        "@codbex/codbex-athena-data-sample": "0.2.0"
     }
 }
