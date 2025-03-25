@@ -1,7 +1,7 @@
 # Docker descriptor for codbex-hestia
 # License - http://www.eclipse.org/legal/epl-v20.html
 
-FROM ghcr.io/codbex/codbex-gaia:1.12.0
+FROM ghcr.io/codbex/codbex-gaia:1.13.0
 
 COPY node_modules/@codbex target/dirigible/repository/root/registry/public/
 
