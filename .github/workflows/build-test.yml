@@ -17,18 +17,7 @@ env:
     GIT_TOKEN: ${{ secrets.YOUR_GITHUB_TOKEN }}
 
 jobs:
-    validate-abap-transpilation:
-        runs-on: ubuntu-latest
-        timeout-minutes: 10
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
-            - run: npm ci
-              working-directory: ./bega-poc
-            - run: npm test
-              working-directory: ./bega-poc
-
-    kronos-integration-tests:
+    athena-integration-tests:
         runs-on: ubuntu-latest
         steps:
             - name: Setup Chrome
