@@ -1,4 +1,4 @@
-package com.codbex.bega.poc.integration.tests;
+package com.codbex.athena.integration.tests;
 
 import org.eclipse.dirigible.components.data.sources.manager.DataSourcesManager;
 import org.mockito.Mockito;

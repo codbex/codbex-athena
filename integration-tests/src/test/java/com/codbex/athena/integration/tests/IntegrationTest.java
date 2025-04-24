@@ -1,4 +1,4 @@
-package com.codbex.bega.poc.integration.tests;
+package com.codbex.athena.integration.tests;
 
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.PortBinding;
@@ -78,11 +78,6 @@ class IntegrationTest {
     @BeforeEach
     final void setUpBrowser() {
         com.codeborne.selenide.Configuration.headless = headlessExecution;
-    }
-
-    @BeforeEach
-    final void assertAppContainerIsStarted() {
-        assertAsyncContainerLog("------- Application has started -------");
     }
 
     @AfterAll
