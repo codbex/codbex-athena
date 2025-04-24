@@ -1,0 +1,47 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.codbex.platform</groupId>
+        <artifactId>codbex-platform-parent</artifactId>
+        <version>11.35.0</version>
+    </parent>
+
+    <name>codbex - athena - parent</name>
+    <description>codbex athena</description>
+    <groupId>com.codbex.athena</groupId>
+    <artifactId>codbex-athena-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <inceptionYear>2025</inceptionYear>
+
+    <url>http://www.codbex.com</url>
+    <organization>
+        <name>codbex</name>
+        <url>http://www.codbex.com</url>
+    </organization>
+    <scm>
+        <url>https://github.com/codbex/codbex-kronos</url>
+    </scm>
+
+    <modules>
+        <module>integration-tests</module>
+    </modules>
+
+    <properties>
+        <project.title>Athena by codbex</project.title>
+
+        <scmVersionType>branch</scmVersionType>
+        <profile.content.phase>none</profile.content.phase>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
