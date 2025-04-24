@@ -5,4 +5,4 @@ FROM ghcr.io/codbex/codbex-gaia:2.37.0
 
 COPY node_modules/@codbex target/dirigible/repository/root/registry/public/
 
-ENV DIRIGIBLE_HOME_URL=/services/web/portal/dashboard.html
+ENV DIRIGIBLE_HOME_URL=/services/web/dashboard/
