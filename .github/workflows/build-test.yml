@@ -10,7 +10,7 @@ on:
 
 env:
   APP_IMAGE_TAG: latest
-  APP_IMAGE: ghcr.io/codbex/codbex-athena:${{ APP_IMAGE_TAG }}
+  APP_IMAGE: ghcr.io/codbex/codbex-athena:latest
 
 permissions:
     contents: read
