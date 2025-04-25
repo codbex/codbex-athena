@@ -22,7 +22,7 @@
         <url>http://www.codbex.com</url>
     </organization>
     <scm>
-        <url>https://github.com/codbex/codbex-kronos</url>
+        <url>https://github.com/codbex/codbex-athena</url>
     </scm>
 
     <modules>

@@ -33,14 +33,10 @@ class IntegrationTest {
     // set config to false if you want to disable the headless mode
     private static final boolean headlessExecution = Boolean.parseBoolean(Configuration.get("selenide.headless", Boolean.TRUE.toString()));
 
-    private static final String APP_IMAGE_TAG = "latest";
-    private static final String APP_IMAGE = "ghcr.io/codbex/codbex-athena:" + APP_IMAGE_TAG;
-    private static final int EXPOSED_PORT = 80;
+    private static final String APP_IMAGE_TAG = System.getenv().getOrDefault("APP_IMAGE_TAG", "latest");
+    private static final String APP_IMAGE = System.getenv().getOrDefault("APP_IMAGE", "ghcr.io/codbex/codbex-athena:" + APP_IMAGE_TAG);
 
-    // modify the following constants if you don't want to set system/env variables for them
-    private static final String DEFAULT_GIT_USER = "my-user";
-    private static final String DEFAULT_GIT_TOKEN = "my-token";
-    private static final String DEFAULT_GIT_BRANCH = "main";
+    private static final int EXPOSED_PORT = 80;
 
     static final int RANDOM_PORT = PortUtil.getFreeRandomPort();
 
@@ -59,10 +55,6 @@ class IntegrationTest {
                                                                                                .withReuse(false);
 
     protected static final String PROJECT_REPO_URL = "https://github.com/codbex/codbex-athena.git";
-
-    protected final String gitBranch = Configuration.get("git.branch", DEFAULT_GIT_BRANCH);
-    protected final String gitUser = Configuration.get("git.user", DEFAULT_GIT_USER);
-    protected final String gitToken = Configuration.get("git.token", DEFAULT_GIT_TOKEN);
 
     @Autowired
     protected Browser browser;

@@ -8,13 +8,12 @@ on:
     schedule:
         - cron: '0 0 * * *' # runs at 00:00 UTC daily
 
+env:
+  APP_IMAGE_TAG: ${{ github.sha }}
+  APP_IMAGE: ghcr.io/codbex/codbex-athena:${{ github.sha }}
+
 permissions:
     contents: read
-
-env:
-    GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
-    GIT_USER: ${{ github.actor }}
-    GIT_TOKEN: ${{ secrets.YOUR_GITHUB_TOKEN }}
 
 jobs:
     athena-integration-tests:
@@ -59,11 +58,7 @@ jobs:
               run: npm i -g typescript
 
             - name: Integration tests
-              env:
-                  GIT_BRANCH: ${{ github.head_ref || github.ref_name }}
-                  GIT_USER: ${{ github.actor }}
-                  GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: mvn clean install -P integration-tests -Dgit.branch=${GIT_BRANCH} -Dgit.user=${GIT_USER} -Dgit.token=${GIT_TOKEN}
+              run: mvn clean install -P integration-tests
 
             - name: Generate a random artifact name
               if: always()
