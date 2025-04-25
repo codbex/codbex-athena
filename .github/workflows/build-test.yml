@@ -9,8 +9,8 @@ on:
         - cron: '0 0 * * *' # runs at 00:00 UTC daily
 
 env:
-  APP_IMAGE_TAG: ${{ github.sha }}
-  APP_IMAGE: ghcr.io/codbex/codbex-athena:${{ github.sha }}
+  APP_IMAGE_TAG: latest
+  APP_IMAGE: ghcr.io/codbex/codbex-athena:${{ APP_IMAGE_TAG }}
 
 permissions:
     contents: read
