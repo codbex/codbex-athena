@@ -2,6 +2,7 @@
 node_modules/
 package-lock.json
 
+
 **/dist
 dist
 node_modules
@@ -37,3 +38,4 @@ derby.log
 **/package-lock.json
 
 .env
+.idea

@@ -1,8 +1,8 @@
-# Docker descriptor for codbex-hestia
+# Docker descriptor for codbex-athena-data-sample
 # License - http://www.eclipse.org/legal/epl-v20.html
 
-FROM ghcr.io/codbex/codbex-gaia:2.36.0
+FROM ghcr.io/codbex/codbex-gaia:2.39.0
 
 COPY node_modules/@codbex target/dirigible/repository/root/registry/public/
 
-ENV DIRIGIBLE_HOME_URL=/services/web/portal/dashboard.html
+ENV DIRIGIBLE_HOME_URL=/services/web/dashboard/
