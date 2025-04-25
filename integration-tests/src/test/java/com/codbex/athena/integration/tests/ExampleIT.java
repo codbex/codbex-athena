@@ -13,6 +13,6 @@ class ExampleIT extends IntegrationTest {
 
     private void openHomepage(){
         ide.openPath("/services/web/dashboard");
-//        browser.assertElementExistsByTypeAndContainsText(HtmlElementType.HEADER1, "Athena");
+        browser.assertElementExistsByTypeAndContainsText(HtmlElementType.HEADER1, "Athena");
     }
 }
