@@ -33,8 +33,7 @@ class IntegrationTest {
     // set config to false if you want to disable the headless mode
     private static final boolean headlessExecution = Boolean.parseBoolean(Configuration.get("selenide.headless", Boolean.TRUE.toString()));
 
-    private static final String APP_IMAGE_TAG = System.getenv().getOrDefault("APP_IMAGE_TAG", "latest");
-    private static final String APP_IMAGE = System.getenv().getOrDefault("APP_IMAGE", "ghcr.io/codbex/codbex-athena:" + APP_IMAGE_TAG);
+    private static final String APP_IMAGE = System.getenv().getOrDefault("APP_IMAGE", "ghcr.io/codbex/codbex-athena:latest");
 
     private static final int EXPOSED_PORT = 80;
 

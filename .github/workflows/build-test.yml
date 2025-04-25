@@ -9,11 +9,14 @@ on:
         - cron: '0 0 * * *' # runs at 00:00 UTC daily
 
 env:
-  APP_IMAGE_TAG: latest
-  APP_IMAGE: ghcr.io/codbex/codbex-athena:latest
+    # APP_IMAGE_TAG: latest # No longer fixed
+    # APP_IMAGE: ghcr.io/codbex/codbex-athena:latest # Will be set dynamically
+    REGISTRY: ghcr.io
+    IMAGE_BASE_NAME: ${{ github.repository }} # e.g., codbex/codbex-athena
 
 permissions:
     contents: read
+    packages: write # Needed to build images in the repo scope
 
 jobs:
     athena-integration-tests:
@@ -51,13 +54,38 @@ jobs:
               with:
                   node-version: 18
 
-            - name: Install esbuild
-              run: npm i -g esbuild
+            - name: Install Dependencies # Install dependencies needed for Docker build context
+              run: npm install --prefix application
 
-            - name: Install TypeScript compiler
-              run: npm i -g typescript
+            # - name: Install esbuild # Not needed if build happens in Docker
+            #   run: npm i -g esbuild
+
+            # - name: Install TypeScript compiler # Not needed if build happens in Docker
+            #   run: npm i -g typescript
+
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v3
+
+            # Login is not strictly required to build locally, but good practice if pushing later
+            # - name: Log in to the Container registry
+            #   uses: docker/login-action@v3
+            #   with:
+            #     registry: ${{ env.REGISTRY }}
+            #     username: ${{ github.actor }}
+            #     password: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Build Docker image
+              id: docker_build
+              run: |
+                  TAG=${{ github.sha }}
+                  IMAGE_NAME=${{ env.REGISTRY }}/${{ env.IMAGE_BASE_NAME }}:$TAG
+                  echo "Building image: $IMAGE_NAME"
+                  docker build -t $IMAGE_NAME -f application/Dockerfile .
+                  echo "BUILT_IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV # Set env var for subsequent steps
 
             - name: Integration tests
+              env:
+                  APP_IMAGE: ${{ env.BUILT_IMAGE_NAME }} # Pass the dynamically built image name
               run: mvn clean install -P integration-tests
 
             - name: Generate a random artifact name
