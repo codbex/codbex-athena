@@ -30,7 +30,6 @@ import static org.awaitility.Awaitility.await;
 @ContextConfiguration(classes = {TestConfigurations.class})
 class IntegrationTest {
 
-    // set config to false if you want to disable the headless mode
     private static final boolean headlessExecution = Boolean.parseBoolean(Configuration.get("selenide.headless", Boolean.TRUE.toString()));
 
     private static final String APP_IMAGE = System.getenv().getOrDefault("APP_IMAGE", "codbex-athena:test");
@@ -40,23 +39,21 @@ class IntegrationTest {
 
     static final int RANDOM_PORT = PortUtil.getFreeRandomPort();
 
-    private static final PortBinding portBinding = new PortBinding(Ports.Binding.bindPort(RANDOM_PORT), new ExposedPort(EXPOSED_PORT));
+    private static final PortBinding portBinding = new PortBinding(
+            Ports.Binding.bindPort(RANDOM_PORT),
+            new ExposedPort(EXPOSED_PORT)
+    );
+
     @Container
-    protected static final GenericContainer<?> appContainer = new GenericContainer<>(APP_IMAGE)//
-                                                                                               .withExposedPorts(EXPOSED_PORT)
-                                                                                               .withCreateContainerCmdModifier(
-                                                                                                       cmd -> cmd.withPortBindings(
-                                                                                                               portBinding))
-                                                                                               .withLogConsumer(new Slf4jLogConsumer(
-                                                                                                       LoggerFactory.getLogger(
-                                                                                                               "ContainerLogger")))
-                                                                                               // ensures container is not reused between
-                                                                                               // test runs
-                                                                                               .withReuse(false);
+    protected static final GenericContainer<?> appContainer = new GenericContainer<>(APP_IMAGE)
+            .withExposedPorts(EXPOSED_PORT)
+            .withCreateContainerCmdModifier(cmd -> cmd.withPortBindings(portBinding))
+            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("AppContainerLogger")))
+            .withReuse(false);
 
     @Container
     protected static final GenericContainer<?> sampleDataContainer = new GenericContainer<>(SAMPLE_DATA_IMAGE)
-            .withExposedPorts(80)
+            .withExposedPorts(EXPOSED_PORT)
             .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("SampleDataContainerLogger")))
             .withReuse(false);
 
@@ -69,8 +66,21 @@ class IntegrationTest {
     protected IDE ide;
 
     @BeforeAll
-    public static void setUpContainer() {
+    public static void setUpContainers() {
         appContainer.start();
+        sampleDataContainer.start();
+
+        await().atMost(60, TimeUnit.SECONDS)
+               .pollInterval(2, TimeUnit.SECONDS)
+               .untilAsserted(() -> {
+                   String appLogs = appContainer.getLogs();
+                   String sampleDataLogs = sampleDataContainer.getLogs();
+                   assertThat(appLogs).contains("Started Application");
+                   assertThat(sampleDataLogs).contains("Sample data initialized");
+               });
+
+        // Update the Selenide base URL
+        System.setProperty("selenide.baseUrl", "http://" + appContainer.getHost() + ":" + RANDOM_PORT);
     }
 
     @BeforeEach
@@ -79,21 +89,19 @@ class IntegrationTest {
     }
 
     @AfterAll
-    public static void stopContainer() {
+    public static void stopContainers() {
+        sampleDataContainer.stop();
         appContainer.stop();
     }
 
     protected void assertAsyncContainerLog(String expectedLog) {
         await().atMost(60, TimeUnit.SECONDS)
                .pollInterval(1, TimeUnit.SECONDS)
-               .untilAsserted(() -> {
-                   assertContainerLog(expectedLog);
-               });
+               .untilAsserted(() -> assertContainerLog(expectedLog));
     }
 
     protected void assertContainerLog(String expectedLog) {
         String containerLogs = appContainer.getLogs();
         assertThat(containerLogs).contains(expectedLog);
     }
-
 }
