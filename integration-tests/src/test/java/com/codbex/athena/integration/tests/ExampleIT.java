@@ -8,11 +8,7 @@ class ExampleIT extends IntegrationTest {
 
     @Test
     void test() {
-        openHomepage();
+        browser.assertElementExistsByTypeAndContainsText(HtmlElementType.SPAN, "Dirigible");
     }
 
-    private void openHomepage(){
-        ide.openPath("/services/web/dashboard");
-        // browser.assertElementExistsByTypeAndContainsText(HtmlElementType.HEADER1, "Athena");
-    }
 }

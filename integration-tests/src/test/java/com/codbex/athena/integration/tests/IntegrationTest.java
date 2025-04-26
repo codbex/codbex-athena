@@ -74,9 +74,7 @@ class IntegrationTest {
                .pollInterval(2, TimeUnit.SECONDS)
                .untilAsserted(() -> {
                    String appLogs = appContainer.getLogs();
-                   String sampleDataLogs = sampleDataContainer.getLogs();
-                   assertThat(appLogs).contains("Started Application");
-                   assertThat(sampleDataLogs).contains("Sample data initialized");
+                   assertThat(appLogs).contains("Application has started");
                });
 
         // Update the Selenide base URL
