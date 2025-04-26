@@ -60,6 +60,14 @@ jobs:
         run: |
           docker build -t codbex-athena:test application/
 
+      - name: Install Athena Sample Data Node.js dependencies
+        working-directory: application-data-sample
+        run: |
+          echo "@codbex:registry=https://npm.pkg.github.com" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> .npmrc
+          npm install
+          rm -rf .npmrc
+
       - name: Build Sample Data Docker image
         run: |
           docker build -t codbex-athena-data-sample:test application-data-sample/
