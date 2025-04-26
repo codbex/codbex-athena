@@ -33,7 +33,8 @@ class IntegrationTest {
     // set config to false if you want to disable the headless mode
     private static final boolean headlessExecution = Boolean.parseBoolean(Configuration.get("selenide.headless", Boolean.TRUE.toString()));
 
-    private static final String APP_IMAGE = System.getenv().getOrDefault("APP_IMAGE", "ghcr.io/codbex/codbex-athena:latest");
+    private static final String APP_IMAGE = System.getenv().getOrDefault("APP_IMAGE", "codbex-athena:test");
+    private static final String SAMPLE_DATA_IMAGE = System.getenv().getOrDefault("SAMPLE_DATA_IMAGE", "codbex-athena-data-sample:test");
 
     private static final int EXPOSED_PORT = 80;
 
@@ -52,6 +53,12 @@ class IntegrationTest {
                                                                                                // ensures container is not reused between
                                                                                                // test runs
                                                                                                .withReuse(false);
+
+    @Container
+    protected static final GenericContainer<?> sampleDataContainer = new GenericContainer<>(SAMPLE_DATA_IMAGE)
+            .withExposedPorts(80)
+            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("SampleDataContainerLogger")))
+            .withReuse(false);
 
     protected static final String PROJECT_REPO_URL = "https://github.com/codbex/codbex-athena.git";
 
