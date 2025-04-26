@@ -8,7 +8,6 @@ class ExampleIT extends IntegrationTest {
 
     @Test
     void test() {
-        ide.openPath("/services/web/dashboard");
         browser.assertElementExistsByTypeAndContainsText(HtmlElementType.SPAN, "Dirigible");
     }
 

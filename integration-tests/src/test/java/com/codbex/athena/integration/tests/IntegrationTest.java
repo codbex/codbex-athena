@@ -84,6 +84,8 @@ class IntegrationTest {
     @BeforeEach
     final void setUpBrowser() {
         com.codeborne.selenide.Configuration.headless = headlessExecution;
+        browser.openPath("/");
+        ide.login(false);
     }
 
     @AfterAll
