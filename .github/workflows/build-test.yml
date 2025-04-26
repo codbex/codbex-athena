@@ -1,36 +1,32 @@
-name: Build & Tests
+name: Build and Test
 
 on:
-    push:
-        branches:
-            - main
     pull_request:
-    schedule:
-        - cron: '0 0 * * *' # runs at 00:00 UTC daily
-
-env:
-    APP_IMAGE: ghcr.io/codbex/codbex-athena:latest
-
-permissions:
-    contents: read
+        branches: [main]
+    push:
+        branches: [main]
 
 jobs:
-    athena-integration-tests:
+    build-test:
         runs-on: ubuntu-latest
+
         steps:
-            - name: Setup Chrome
-              uses: browser-actions/setup-chrome@v1.5.0
-              with:
-                  chrome-version: stable
-            - if: runner.os == 'Linux'
-              run: chrome --version
-            - if: runner.os == 'macOS'
-              run: '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version'
-            - if: runner.os == 'Windows'
-              run: (Get-Item (Get-Command chrome).Source).VersionInfo.ProductVersion
             - uses: actions/checkout@v4
               with:
                   fetch-depth: 0
+
+            - name: Build codbex-athena Docker image from source
+              run: |
+                  docker build -t codbex-athena:test application/
+
+            - name: Build codbex-athena-data-sample Docker image from source
+              run: |
+                  docker build -t codbex-athena-data-sample:test application-data-sample/
+
+            - name: Set APP_IMAGE and APP_DATA_SAMPLE_IMAGE to local builds
+              run: |
+                  echo "APP_IMAGE=codbex-athena:test" >> $GITHUB_ENV
+                  echo "APP_DATA_SAMPLE_IMAGE=codbex-athena-data-sample:test" >> $GITHUB_ENV
 
             - name: Cache local Maven repository
               uses: actions/cache@v4
@@ -45,31 +41,5 @@ jobs:
                   distribution: 'corretto'
                   java-version: 21
 
-            - name: Install NodeJS
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 18
-
-            - name: Install esbuild
-              run: npm i -g esbuild
-
-            - name: Install TypeScript compiler
-              run: npm i -g typescript
-
-            - name: Integration tests
-              run: mvn clean install -P integration-tests
-
-            - name: Generate a random artifact name
-              if: always()
-              id: generate_name
-              run: |
-                  TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-                  echo "ARTIFACT_NAME=selenide-screenshots-${TIMESTAMP}.zip" >> $GITHUB_ENV
-
-            - name: Upload selenide screenshots
-              uses: actions/upload-artifact@v4
-              if: always()
-              with:
-                  retention-days: 1
-                  name: ${{ env.ARTIFACT_NAME }}
-                  path: integration-tests/build/reports/tests
+            - name: Build and test with Maven
+              run: mvn clean verify
