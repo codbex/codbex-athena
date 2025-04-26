@@ -4,7 +4,7 @@
 FROM node:20 as builder
 
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY package.json  ./
 RUN npm install
 
 FROM ghcr.io/codbex/codbex-gaia:2.39.0
