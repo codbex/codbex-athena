@@ -2,10 +2,10 @@
 
 Accounting Management Application
 
-
 ## Run Athena Docker image locally
 
 ### Prerequisites
+
 ```shell
 export GIT_REPO_FOLDER='<path-to-athena-git-repo>'
 export GH_TOKEN='<your-token>'
@@ -28,6 +28,7 @@ rm -rf .npmrc
 cd "$GIT_REPO_FOLDER/application"
 docker build . --tag "$IMAGE"
 ```
+
 ### Run Docker image
 
 ```shell
@@ -35,4 +36,15 @@ docker build . --tag "$IMAGE"
 docker rm -f "$CONTAINER_NAME"
 
 docker run --name "$CONTAINER_NAME" -p 80:80 "$IMAGE"
+```
+
+### Manual Steps for Local Testing
+
+```shell
+# build image
+docker build -t codbex-athena:test application/
+docker build -t codbex-athena-data-sample:test application-data-sample/
+
+# run tests
+mvn clean install -P integration-tests
 ```
