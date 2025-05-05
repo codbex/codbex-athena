@@ -44,6 +44,11 @@ abstract class IntegrationTest {
             new ExposedPort(EXPOSED_PORT)
     );
 
+    static {
+        // Force Testcontainers to use local images
+        System.setProperty("TESTCONTAINERS_DOCKER_IMAGE_PULL_POLICY", "never");
+    }
+
     @Container
     protected static final GenericContainer<?> appContainer = new GenericContainer<>(APP_IMAGE)
             .withExposedPorts(EXPOSED_PORT)
