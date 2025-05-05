@@ -9,6 +9,7 @@ class ExampleIT extends IntegrationTest {
     @Test
     void test() {
         browser.assertElementExistsByTypeAndContainsText(HtmlElementType.SPAN, "Dirigible");
+        browser.assertElementExistsByTypeAndContainsText(HtmlElementType.SPAN, "Gross Profit");
     }
 
 }
