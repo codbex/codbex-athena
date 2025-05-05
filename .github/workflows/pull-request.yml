@@ -13,13 +13,6 @@ jobs:
       install-dependencies: true
       dockerfile-location: application/
       run-tests: true
-    secrets: inherit
-
-  application-data-sample:
-    uses: codbex/codbex-infra/.github/workflows/application-pull-request.yaml@feat/add-it-workflows
-    with:
-      application-name: codbex-athena-data-sample
-      install-dependencies: true
-      dockerfile-location: application-data-sample/
-      run-tests: true
+      sample-data-folder: application-data-sample/
+      build-sample-data: true  # Main app doesn't need sample data
     secrets: inherit
