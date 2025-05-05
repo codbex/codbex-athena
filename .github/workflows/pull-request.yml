@@ -14,5 +14,5 @@ jobs:
       dockerfile-location: application/
       run-tests: true
       sample-data-folder: application-data-sample/
-      build-sample-data: true  # Main app doesn't need sample data
+      build-sample-data: true
     secrets: inherit
