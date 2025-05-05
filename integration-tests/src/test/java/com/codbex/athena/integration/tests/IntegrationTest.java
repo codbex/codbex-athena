@@ -28,12 +28,12 @@ import static org.awaitility.Awaitility.await;
 @Testcontainers
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {TestConfigurations.class})
-class IntegrationTest {
+abstract class IntegrationTest {
 
     private static final boolean headlessExecution = Boolean.parseBoolean(Configuration.get("selenide.headless", Boolean.TRUE.toString()));
 
-    private static final String APP_IMAGE = System.getenv().getOrDefault("APP_IMAGE", "codbex-athena:test");
-    private static final String SAMPLE_DATA_IMAGE = System.getenv().getOrDefault("SAMPLE_DATA_IMAGE", "codbex-athena-data-sample:test");
+    private static final String APP_IMAGE = Configuration.get("app.image", "codbex-athena:test");
+    private static final String SAMPLE_DATA_IMAGE = Configuration.get("sample.data.image", "codbex-athena-data-sample:test");
 
     private static final int EXPOSED_PORT = 80;
 
@@ -56,8 +56,6 @@ class IntegrationTest {
             .withExposedPorts(EXPOSED_PORT)
             .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("SampleDataContainerLogger")))
             .withReuse(false);
-
-    protected static final String PROJECT_REPO_URL = "https://github.com/codbex/codbex-athena.git";
 
     @Autowired
     protected Browser browser;

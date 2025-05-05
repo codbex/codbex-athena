@@ -42,11 +42,11 @@ docker run --name "$CONTAINER_NAME" -p 80:80 "$IMAGE"
 
 ```shell
 # build image
+export APP_IMAGE=codbex-athena:latest
+export SAMPLE_DATA_IMAGE=codbex-athena-data-sample:latest
+
 docker build -t codbex-athena:test application/
 docker build -t codbex-athena-data-sample:test application-data-sample/
-
-echo "APP_IMAGE=codbex-athena:test" >> $GITHUB_ENV
-echo "SAMPLE_DATA_IMAGE=codbex-athena-data-sample:test" >> $GITHUB_ENV
 
 # run tests
 mvn clean install -P integration-tests

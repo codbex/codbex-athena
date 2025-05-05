@@ -1,32 +1,32 @@
 name: Build - Application
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
 jobs:
-    application:
-        uses: codbex/codbex-infra/.github/workflows/application-build.yaml@main
-        with:
-            application-name: codbex-athena
-            install-dependencies: true
-            dockerfile-location: application/
-            run-tests: true
-        secrets: inherit
+  application:
+    uses: codbex/codbex-infra/.github/workflows/application-build.yaml@main
+    with:
+      application-name: codbex-athena
+      install-dependencies: true
+      dockerfile-location: application/
+      run-tests: true
+    secrets: inherit
 
-    application-data-sample:
-        uses: codbex/codbex-infra/.github/workflows/application-build.yaml@main
-        with:
-            application-name: codbex-athena-data-sample
-            install-dependencies: true
-            dockerfile-location: application-data-sample/
-            run-tests: true
-        secrets: inherit
+  application-data-sample:
+    uses: codbex/codbex-infra/.github/workflows/application-build.yaml@main
+    with:
+      application-name: codbex-athena-data-sample
+      install-dependencies: true
+      dockerfile-location: application-data-sample/
+      run-tests: true
+    secrets: inherit
 
-    deploy:
-        needs: [application, application-data-sample]
-        uses: ./.github/workflows/deploy.yaml
-        with:
-            application-version: latest
-        secrets: inherit
+  deploy:
+    needs: [application, application-data-sample]
+    uses: ./.github/workflows/deploy.yaml
+    with:
+      application-version: latest
+    secrets: inherit
