@@ -80,7 +80,7 @@ abstract class IntegrationTest {
 
     @AfterAll
     public static void stopContainer() {
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n" + TEST_IMAGE + "\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\nTest image: " + TEST_IMAGE + "\n\n\n\n\n\n\n\n\n\n\n");
         testContainer.stop();
     }
 
