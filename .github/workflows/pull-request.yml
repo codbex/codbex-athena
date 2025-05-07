@@ -13,7 +13,6 @@ jobs:
       install-dependencies: true
       dockerfile-location: application/
       run-tests: true
-      test-param-name: app.image
     secrets: inherit
 
   application-data-sample:
@@ -23,5 +22,4 @@ jobs:
       install-dependencies: true
       dockerfile-location: application-data-sample/
       run-tests: true
-      test-param-name: sample.data.image
     secrets: inherit

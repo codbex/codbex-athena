@@ -32,7 +32,7 @@ abstract class IntegrationTest {
 
     private static final boolean headlessExecution = Boolean.parseBoolean(Configuration.get("selenide.headless", Boolean.TRUE.toString()));
 
-    private static final String TEST_IMAGE = Configuration.get("test.image", "codbex-athena:test");
+    private static final String TEST_IMAGE = Configuration.get("app.image", "codbex-athena:test");
 
     private static final int EXPOSED_PORT = 80;
     static final int RANDOM_PORT = PortUtil.getFreeRandomPort();
