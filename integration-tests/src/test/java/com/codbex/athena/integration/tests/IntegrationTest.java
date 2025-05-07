@@ -32,17 +32,14 @@ abstract class IntegrationTest {
 
     private static final boolean headlessExecution = Boolean.parseBoolean(Configuration.get("selenide.headless", Boolean.TRUE.toString()));
 
-    private static final String APP_IMAGE = System.getProperty("app.image", "codbex-athena:test");
-    private static final String SAMPLE_DATA_IMAGE = System.getProperty("sample.data.image", "codbex-athena-data-sample:test");
+    private static final String APP_IMAGE = Configuration.get("app.image", "codbex-athena:test");
+    private static final String SAMPLE_DATA_IMAGE = Configuration.get("sample.data.image", "codbex-athena-data-sample:test");
 
     private static final int EXPOSED_PORT = 80;
 
     static final int RANDOM_PORT = PortUtil.getFreeRandomPort();
 
-    private static final PortBinding portBinding = new PortBinding(
-            Ports.Binding.bindPort(RANDOM_PORT),
-            new ExposedPort(EXPOSED_PORT)
-    );
+    private static final PortBinding portBinding = new PortBinding(Ports.Binding.bindPort(RANDOM_PORT), new ExposedPort(EXPOSED_PORT));
 
     static {
         // Force Testcontainers to use local images
@@ -50,17 +47,21 @@ abstract class IntegrationTest {
     }
 
     @Container
-    protected static final GenericContainer<?> appContainer = new GenericContainer<>(APP_IMAGE)
-            .withExposedPorts(EXPOSED_PORT)
-            .withCreateContainerCmdModifier(cmd -> cmd.withPortBindings(portBinding))
-            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("AppContainerLogger")))
-            .withReuse(false);
+    protected static final GenericContainer<?> appContainer = new GenericContainer<>(APP_IMAGE).withExposedPorts(EXPOSED_PORT)
+                                                                                               .withCreateContainerCmdModifier(
+                                                                                                       cmd -> cmd.withPortBindings(
+                                                                                                               portBinding))
+                                                                                               .withLogConsumer(new Slf4jLogConsumer(
+                                                                                                       LoggerFactory.getLogger(
+                                                                                                               "AppContainerLogger")))
+                                                                                               .withReuse(false);
 
     @Container
-    protected static final GenericContainer<?> sampleDataContainer = new GenericContainer<>(SAMPLE_DATA_IMAGE)
-            .withExposedPorts(EXPOSED_PORT)
-            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("SampleDataContainerLogger")))
-            .withReuse(false);
+    protected static final GenericContainer<?> sampleDataContainer =
+            new GenericContainer<>(SAMPLE_DATA_IMAGE).withExposedPorts(EXPOSED_PORT)
+                                                     .withLogConsumer(
+                                                             new Slf4jLogConsumer(LoggerFactory.getLogger("SampleDataContainerLogger")))
+                                                     .withReuse(false);
 
     @Autowired
     protected Browser browser;
