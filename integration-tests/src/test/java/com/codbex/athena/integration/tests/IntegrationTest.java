@@ -31,8 +31,7 @@ import static org.awaitility.Awaitility.await;
 abstract class IntegrationTest {
 
     private static final boolean headlessExecution = Boolean.parseBoolean(Configuration.get("selenide.headless", Boolean.TRUE.toString()));
-
-    private static final String TEST_IMAGE = Configuration.get("app.image", "codbex-athena:test");
+    private static final String TEST_IMAGE = System.getProperty("app.image", "codbex-athena:test");
 
     private static final int EXPOSED_PORT = 80;
     static final int RANDOM_PORT = PortUtil.getFreeRandomPort();
@@ -81,6 +80,7 @@ abstract class IntegrationTest {
 
     @AfterAll
     public static void stopContainer() {
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n" + TEST_IMAGE + "\n\n\n\n\n\n\n\n\n\n\n");
         testContainer.stop();
     }
 
