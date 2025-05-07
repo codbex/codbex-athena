@@ -32,57 +32,44 @@ abstract class IntegrationTest {
 
     private static final boolean headlessExecution = Boolean.parseBoolean(Configuration.get("selenide.headless", Boolean.TRUE.toString()));
 
-    private static final String APP_IMAGE = Configuration.get("app.image", "codbex-athena:test");
-    private static final String SAMPLE_DATA_IMAGE = Configuration.get("sample.data.image", "codbex-athena-data-sample:test");
+    private static final String TEST_IMAGE = Configuration.get("test.image", "codbex-athena:test");
 
     private static final int EXPOSED_PORT = 80;
-
     static final int RANDOM_PORT = PortUtil.getFreeRandomPort();
 
-    private static final PortBinding portBinding = new PortBinding(Ports.Binding.bindPort(RANDOM_PORT), new ExposedPort(EXPOSED_PORT));
+    private static final PortBinding portBinding = new PortBinding(
+            Ports.Binding.bindPort(RANDOM_PORT),
+            new ExposedPort(EXPOSED_PORT));
 
     static {
-        // Force Testcontainers to use local images
         System.setProperty("TESTCONTAINERS_DOCKER_IMAGE_PULL_POLICY", "never");
     }
 
     @Container
-    protected static final GenericContainer<?> appContainer = new GenericContainer<>(APP_IMAGE).withExposedPorts(EXPOSED_PORT)
-                                                                                               .withCreateContainerCmdModifier(
-                                                                                                       cmd -> cmd.withPortBindings(
-                                                                                                               portBinding))
-                                                                                               .withLogConsumer(new Slf4jLogConsumer(
-                                                                                                       LoggerFactory.getLogger(
-                                                                                                               "AppContainerLogger")))
-                                                                                               .withReuse(false);
-
-    @Container
-    protected static final GenericContainer<?> sampleDataContainer =
-            new GenericContainer<>(SAMPLE_DATA_IMAGE).withExposedPorts(EXPOSED_PORT)
-                                                     .withLogConsumer(
-                                                             new Slf4jLogConsumer(LoggerFactory.getLogger("SampleDataContainerLogger")))
-                                                     .withReuse(false);
+    protected static final GenericContainer<?> testContainer = new GenericContainer<>(TEST_IMAGE)
+            .withExposedPorts(EXPOSED_PORT)
+            .withCreateContainerCmdModifier(cmd -> cmd.withPortBindings(portBinding))
+            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("ContainerLogger")))
+            .withReuse(false);
 
     @Autowired
     protected Browser browser;
-
     @Autowired
     protected IDE ide;
 
     @BeforeAll
-    public static void setUpContainers() {
-        appContainer.start();
-        sampleDataContainer.start();
+    public static void setUpContainer() {
+        testContainer.start();
 
         await().atMost(60, TimeUnit.SECONDS)
                .pollInterval(2, TimeUnit.SECONDS)
                .untilAsserted(() -> {
-                   String appLogs = appContainer.getLogs();
-                   assertThat(appLogs).contains("Application has started");
+                   String logs = testContainer.getLogs();
+                   assertThat(logs).contains("Application has started");
                });
 
-        // Update the Selenide base URL
-        System.setProperty("selenide.baseUrl", "http://" + appContainer.getHost() + ":" + RANDOM_PORT);
+        System.setProperty("selenide.baseUrl",
+                "http://" + testContainer.getHost() + ":" + RANDOM_PORT);
     }
 
     @BeforeEach
@@ -93,9 +80,8 @@ abstract class IntegrationTest {
     }
 
     @AfterAll
-    public static void stopContainers() {
-        sampleDataContainer.stop();
-        appContainer.stop();
+    public static void stopContainer() {
+        testContainer.stop();
     }
 
     protected void assertAsyncContainerLog(String expectedLog) {
@@ -105,7 +91,6 @@ abstract class IntegrationTest {
     }
 
     protected void assertContainerLog(String expectedLog) {
-        String containerLogs = appContainer.getLogs();
-        assertThat(containerLogs).contains(expectedLog);
+        assertThat(testContainer.getLogs()).contains(expectedLog);
     }
 }
