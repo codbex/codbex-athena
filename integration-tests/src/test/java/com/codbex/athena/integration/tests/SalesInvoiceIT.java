@@ -19,6 +19,8 @@ import java.util.Map;
 public class SalesInvoiceIT extends IntegrationTest {
     @Test
     void testAddingSalesInvoice() {
+        createCity();
+        ide.reload();
         createCustomer();
         ide.reload();
 //        createEmployee();
@@ -41,7 +43,7 @@ public class SalesInvoiceIT extends IntegrationTest {
 //        browser.enterTextInElementById("idCurrency", "BGN");
 //        browser.enterTextInElementById("idStatus", "New");
 //        browser.enterTextInElementById("idOperator", "EmployeeA");
-//        browser.enterTextInElementById("idNationality", "Bulgaria");
+//        browser.enterTextInElementById("idNationality", "Italy");
 //        browser.enterTextInElementById("idMartialStatus", "Single");
 //        browser.enterTextInElementById("idIBAN", "IE64IRCE92050112345678");
 //        browser.clickOnElementWithText(HtmlElementType.BUTTON, "Create");
@@ -63,7 +65,7 @@ public class SalesInvoiceIT extends IntegrationTest {
 //        browser.enterTextInElementById("idBirthDate", "01012001");
 //        browser.enterTextInElementById("idPersonalNumber", "1234567899");
 //        browser.enterTextInElementById("idGender", "Male");
-//        browser.enterTextInElementById("idNationality", "Bulgaria");
+//        browser.enterTextInElementById("idNationality", "Italy");
 //        browser.enterTextInElementById("idMartialStatus", "Single");
 //        browser.enterTextInElementById("idIBAN", "IE64IRCE92050112345678");
 //        browser.clickOnElementWithText(HtmlElementType.BUTTON, "Create");
@@ -73,8 +75,6 @@ public class SalesInvoiceIT extends IntegrationTest {
 //    }
 
     private void createCustomer() {
-        createCity();
-
         browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__navigation-item-text",
                 "Partners");
         browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__navigation-item-text",
@@ -85,7 +85,7 @@ public class SalesInvoiceIT extends IntegrationTest {
 
         browser.enterTextInElementById("idName", "CustomerA");
         browser.enterTextInElementByAttributePattern("textarea", "id", "idAddress", "somewhere");
-        browser.enterTextInElementById("idCountry", "Bulgaria");
+        browser.enterTextInElementById("idCountry", "Italy");
         browser.enterTextInElementById("idEmail", "customera@mail.com");
         browser.clickOnElementWithText(HtmlElementType.BUTTON, "Create");
 
@@ -100,8 +100,8 @@ public class SalesInvoiceIT extends IntegrationTest {
 
         browser.clickOnElementWithText(HtmlElementType.BUTTON, "Create");
 
-        browser.enterTextInElementById("idName", "Sofia");
-        browser.enterTextInElementById("idCountry", "Bulgaria");
+        browser.enterTextInElementById("idName", "Rome");
+        browser.enterTextInElementById("idCountry", "Italy");
 
         browser.clickOnElementByAttributePatternAndText(HtmlElementType.BUTTON, HtmlAttribute.CLASS, "fd-button fd-button--emphasized",
                 "Create");
