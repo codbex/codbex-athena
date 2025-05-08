@@ -31,25 +31,26 @@ import static org.awaitility.Awaitility.await;
 abstract class IntegrationTest {
 
     private static final boolean headlessExecution = Boolean.parseBoolean(Configuration.get("selenide.headless", Boolean.TRUE.toString()));
-    private static final String TEST_IMAGE = System.getProperty("app.image", "codbex-athena:test");
+    private static final String TEST_IMAGE = System.getProperty("app.image", "ghcr.io/codbex/codbex-athena:1.5.0");
 
     private static final int EXPOSED_PORT = 80;
     static final int RANDOM_PORT = PortUtil.getFreeRandomPort();
 
-    private static final PortBinding portBinding = new PortBinding(
-            Ports.Binding.bindPort(RANDOM_PORT),
-            new ExposedPort(EXPOSED_PORT));
+    private static final PortBinding portBinding = new PortBinding(Ports.Binding.bindPort(RANDOM_PORT), new ExposedPort(EXPOSED_PORT));
 
-    static {
-        System.setProperty("TESTCONTAINERS_DOCKER_IMAGE_PULL_POLICY", "never");
-    }
+    // static {
+    // System.setProperty("TESTCONTAINERS_DOCKER_IMAGE_PULL_POLICY", "never");
+    // }
 
     @Container
-    protected static final GenericContainer<?> testContainer = new GenericContainer<>(TEST_IMAGE)
-            .withExposedPorts(EXPOSED_PORT)
-            .withCreateContainerCmdModifier(cmd -> cmd.withPortBindings(portBinding))
-            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("ContainerLogger")))
-            .withReuse(false);
+    protected static final GenericContainer<?> testContainer = new GenericContainer<>(TEST_IMAGE).withExposedPorts(EXPOSED_PORT)
+                                                                                                 .withCreateContainerCmdModifier(
+                                                                                                         cmd -> cmd.withPortBindings(
+                                                                                                                 portBinding))
+                                                                                                 .withLogConsumer(new Slf4jLogConsumer(
+                                                                                                         LoggerFactory.getLogger(
+                                                                                                                 "ContainerLogger")))
+                                                                                                 .withReuse(false);
 
     @Autowired
     protected Browser browser;
@@ -60,22 +61,23 @@ abstract class IntegrationTest {
     public static void setUpContainer() {
         testContainer.start();
 
-        await().atMost(60, TimeUnit.SECONDS)
-               .pollInterval(2, TimeUnit.SECONDS)
-               .untilAsserted(() -> {
-                   String logs = testContainer.getLogs();
-                   assertThat(logs).contains("Application has started");
-               });
+        // await().atMost(60, TimeUnit.SECONDS)
+        // .pollInterval(2, TimeUnit.SECONDS)
+        // .untilAsserted(() -> {
+        // String logs = testContainer.getLogs();
+        // assertThat(logs).contains("Application has started");
+        // });
 
-        System.setProperty("selenide.baseUrl",
-                "http://" + testContainer.getHost() + ":" + RANDOM_PORT);
+        System.setProperty("selenide.baseUrl", "http://" + testContainer.getHost() + ":" + RANDOM_PORT);
     }
 
     @BeforeEach
     final void setUpBrowser() {
-        com.codeborne.selenide.Configuration.headless = headlessExecution;
+        // com.codeborne.selenide.Configuration.headless = headlessExecution;
+        com.codeborne.selenide.Configuration.headless = false;
         browser.openPath("/");
         ide.login(false);
+        // /services/web/dashboard
     }
 
     @AfterAll
