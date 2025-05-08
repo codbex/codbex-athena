@@ -38,9 +38,9 @@ abstract class IntegrationTest {
 
     private static final PortBinding portBinding = new PortBinding(Ports.Binding.bindPort(RANDOM_PORT), new ExposedPort(EXPOSED_PORT));
 
-    // static {
-    // System.setProperty("TESTCONTAINERS_DOCKER_IMAGE_PULL_POLICY", "never");
-    // }
+     static {
+     System.setProperty("TESTCONTAINERS_DOCKER_IMAGE_PULL_POLICY", "never");
+     }
 
     @Container
     protected static final GenericContainer<?> testContainer = new GenericContainer<>(TEST_IMAGE).withExposedPorts(EXPOSED_PORT)
@@ -61,23 +61,21 @@ abstract class IntegrationTest {
     public static void setUpContainer() {
         testContainer.start();
 
-        // await().atMost(60, TimeUnit.SECONDS)
-        // .pollInterval(2, TimeUnit.SECONDS)
-        // .untilAsserted(() -> {
-        // String logs = testContainer.getLogs();
-        // assertThat(logs).contains("Application has started");
-        // });
+         await().atMost(60, TimeUnit.SECONDS)
+         .pollInterval(2, TimeUnit.SECONDS)
+         .untilAsserted(() -> {
+         String logs = testContainer.getLogs();
+         assertThat(logs).contains("Application has started");
+         });
 
         System.setProperty("selenide.baseUrl", "http://" + testContainer.getHost() + ":" + RANDOM_PORT);
     }
 
     @BeforeEach
     final void setUpBrowser() {
-        // com.codeborne.selenide.Configuration.headless = headlessExecution;
-        com.codeborne.selenide.Configuration.headless = false;
+         com.codeborne.selenide.Configuration.headless = headlessExecution;
         browser.openPath("/");
         ide.login(false);
-        // /services/web/dashboard
     }
 
     @AfterAll
