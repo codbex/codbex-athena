@@ -50,8 +50,8 @@ public class SalesInvoiceIT extends IntegrationTest {
         browser.enterTextInElementById("idCustomer", "CustomerA");
         enterDateById("idDate", "01012001");
         enterDateById("idDue", "01022001");
-        browser.enterTextInElementById("idCurrency", "BGN");
         browser.enterTextInElementById("idStatus", "New");
+        browser.enterTextInElementById("idCurrency", "BGN");
         browser.enterTextInElementById("idOperator", "EmployeeA");
         browser.clickOnElementWithText(HtmlElementType.BUTTON, "Create");
 
