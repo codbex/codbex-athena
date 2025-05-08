@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.codbex.platform</groupId>
         <artifactId>codbex-platform-parent</artifactId>
-        <version>11.35.0</version>
+        <version>11.45.10</version>
     </parent>
 
     <name>codbex - athena - parent</name>
