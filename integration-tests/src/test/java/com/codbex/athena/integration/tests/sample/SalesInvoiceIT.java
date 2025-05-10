@@ -16,11 +16,18 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.eclipse.dirigible.tests.framework.browser.HtmlAttribute;
 import org.eclipse.dirigible.tests.framework.browser.HtmlElementType;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
 public class SalesInvoiceIT extends IntegrationTest {
+    @BeforeEach
+    void setUp() {
+        browser.openPath("/");
+        ide.login(false);
+    }
+
     @Test
     void testAddingSalesInvoice() {
         createCity();
@@ -38,14 +45,17 @@ public class SalesInvoiceIT extends IntegrationTest {
         dateInput.setValue(date);
     }
 
-    private void createSalesInvoice() {
+    private void navigateCreate(String navMenu, String navItem){
         browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__navigation-item-text",
-                "Sales");
+                navMenu);
         browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__navigation-item-text",
-                "Sales Invoice");
-
+                navItem);
         browser.clickElementByAttributes(HtmlElementType.BUTTON,
                 Map.of(HtmlAttribute.GLYPH, "sap-icon--add", HtmlAttribute.CLASS, "fd-button fd-button--compact fd-button--transparent"));
+    }
+
+    private void createSalesInvoice() {
+        navigateCreate("Sales", "Sales Invoice");
 
         browser.enterTextInElementById("idCustomer", "CustomerA");
         enterDateById("idDate", "01012001");
@@ -82,13 +92,7 @@ public class SalesInvoiceIT extends IntegrationTest {
     }
 
     private void createCustomer() {
-        browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__navigation-item-text",
-                "Partners");
-        browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__navigation-item-text",
-                "Customers");
-
-        browser.clickElementByAttributes(HtmlElementType.BUTTON,
-                Map.of(HtmlAttribute.GLYPH, "sap-icon--add", HtmlAttribute.CLASS, "fd-button fd-button--compact fd-button--transparent"));
+        navigateCreate("Partners", "Customers");
 
         browser.enterTextInElementById("idName", "CustomerA");
         browser.enterTextInElementByAttributePattern("textarea", "id", "idAddress", "somewhere");
@@ -104,17 +108,14 @@ public class SalesInvoiceIT extends IntegrationTest {
         browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__navigation-item-text",
                 "Settings");
         browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__title", "City");
-
         browser.clickOnElementWithText(HtmlElementType.BUTTON, "Create");
 
         browser.enterTextInElementById("idName", "Rome");
         browser.enterTextInElementById("idCountry", "Italy");
-
         browser.clickOnElementByAttributePatternAndText(HtmlElementType.BUTTON, HtmlAttribute.CLASS, "fd-button fd-button--emphasized",
                 "Create");
 
         browser.assertElementExistsByTypeAndText("p", "City successfully created");
         browser.clickOnElementWithText(HtmlElementType.BUTTON, "Close");
-
     }
 }

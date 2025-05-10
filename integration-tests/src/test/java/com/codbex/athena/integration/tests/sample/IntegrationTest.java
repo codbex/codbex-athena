@@ -48,10 +48,6 @@ abstract class IntegrationTest {
 
     private static final PortBinding portBinding = new PortBinding(Ports.Binding.bindPort(RANDOM_PORT), new ExposedPort(EXPOSED_PORT));
 
-    static {
-        System.setProperty("TESTCONTAINERS_DOCKER_IMAGE_PULL_POLICY", "never");
-    }
-
     @Container
     protected static final GenericContainer<?> testContainer = new GenericContainer<>(TEST_IMAGE).withExposedPorts(EXPOSED_PORT)
                                                                                                  .withCreateContainerCmdModifier(
@@ -78,14 +74,12 @@ abstract class IntegrationTest {
                    assertThat(logs).contains("Application has started");
                });
 
-        System.setProperty("selenide.baseUrl", "http://" + testContainer.getHost() + ":" + RANDOM_PORT);
+        com.codeborne.selenide.Configuration.baseUrl = "http://" + testContainer.getHost() + ":" + RANDOM_PORT;
     }
 
     @BeforeEach
     final void setUpBrowser() {
         com.codeborne.selenide.Configuration.headless = headlessExecution;
-        browser.openPath("/");
-        ide.login(false);
     }
 
     @AfterAll

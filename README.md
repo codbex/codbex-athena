@@ -41,13 +41,12 @@ docker run --name "$CONTAINER_NAME" -p 80:80 "$IMAGE"
 ### Manual Steps for Local Testing
 
 ```shell
-# build image
-export APP_IMAGE=codbex-athena:latest
-export SAMPLE_DATA_IMAGE=codbex-athena-data-sample:latest
-
+# build images
 docker build -t codbex-athena:test application/
 docker build -t codbex-athena-data-sample:test application-data-sample/
 
-# run tests
-mvn clean install -P integration-tests
+# run tests with image tags as Maven system properties
+mvn clean install -P integration-tests \
+  -DAPP_IMAGE=codbex-athena:test \
+  -DSAMPLE_DATA_IMAGE=codbex-athena-data-sample:test
 ```
