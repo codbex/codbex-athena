@@ -2,21 +2,26 @@ name: Pull Request - Application
 
 on:
   pull_request:
-    branches: 
+    branches:
       - main
 
 jobs:
   application:
-    uses: codbex/codbex-infra/.github/workflows/application-pull-request.yaml@main
+    uses: codbex/codbex-infra/.github/workflows/application-pull-request.yaml@feat/add-it-workflows
     with:
       application-name: codbex-athena
       install-dependencies: true
       dockerfile-location: application/
+      run-tests: true
+      tests-package: '*.tests.application.*IT'
     secrets: inherit
+
   application-data-sample:
-    uses: codbex/codbex-infra/.github/workflows/application-pull-request.yaml@main
+    uses: codbex/codbex-infra/.github/workflows/application-pull-request.yaml@feat/add-it-workflows
     with:
       application-name: codbex-athena-data-sample
       install-dependencies: true
       dockerfile-location: application-data-sample/
+      run-tests: true
+      tests-package: '*.tests.sample.*IT'
     secrets: inherit
