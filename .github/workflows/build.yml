@@ -7,7 +7,7 @@ on:
 
 jobs:
   application:
-    uses: codbex/codbex-infra/.github/workflows/application-build.yaml@main
+    uses: codbex/codbex-infra/.github/workflows/application-build.yaml@feat/add-it-workflows
     with:
       application-name: codbex-athena
       install-dependencies: true
@@ -16,7 +16,7 @@ jobs:
     secrets: inherit
 
   application-data-sample:
-    uses: codbex/codbex-infra/.github/workflows/application-build.yaml@main
+    uses: codbex/codbex-infra/.github/workflows/application-build.yaml@feat/add-it-workflows
     with:
       application-name: codbex-athena-data-sample
       install-dependencies: true
