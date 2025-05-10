@@ -13,6 +13,7 @@ jobs:
       install-dependencies: true
       dockerfile-location: application/
       run-tests: true
+      test-package: '*.tests.application.*IT'
     secrets: inherit
 
   application-data-sample:

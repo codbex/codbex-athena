@@ -8,15 +8,15 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-package com.codbex.athena.integration.tests;
+package com.codbex.athena.integration.tests.application;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.eclipse.dirigible.tests.framework.browser.HtmlAttribute;
-import org.junit.jupiter.api.Test;
 import org.eclipse.dirigible.tests.framework.browser.HtmlElementType;
+import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 

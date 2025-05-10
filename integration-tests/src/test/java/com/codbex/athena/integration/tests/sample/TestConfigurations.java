@@ -8,7 +8,7 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-package com.codbex.athena.integration.tests;
+package com.codbex.athena.integration.tests.sample;
 
 import org.eclipse.dirigible.components.data.sources.manager.DataSourcesManager;
 import org.mockito.Mockito;

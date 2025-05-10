@@ -8,7 +8,7 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-package com.codbex.athena.integration.tests;
+package com.codbex.athena.integration.tests.sample;
 
 import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.PortBinding;
@@ -41,7 +41,7 @@ import static org.awaitility.Awaitility.await;
 abstract class IntegrationTest {
 
     private static final boolean headlessExecution = Boolean.parseBoolean(Configuration.get("selenide.headless", Boolean.TRUE.toString()));
-    private static final String TEST_IMAGE = System.getProperty("app.image", "ghcr.io/codbex/codbex-athena:1.5.0");
+    private static final String TEST_IMAGE = System.getProperty("app.image", "ghcr.io/codbex/codbex-athena-data-sample:latest");
 
     private static final int EXPOSED_PORT = 80;
     static final int RANDOM_PORT = PortUtil.getFreeRandomPort();
