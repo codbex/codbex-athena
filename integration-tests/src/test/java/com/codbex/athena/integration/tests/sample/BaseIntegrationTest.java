@@ -41,7 +41,7 @@ import static org.awaitility.Awaitility.await;
 abstract class BaseIntegrationTest {
 
     private static final boolean headlessExecution = Boolean.parseBoolean(Configuration.get("selenide.headless", Boolean.TRUE.toString()));
-    private static final String TEST_IMAGE = System.getProperty("app.image", "ghcr.io/codbex/codbex-athena-data-sample:latest");
+    private static final String TEST_IMAGE = System.getProperty("sample.image", "ghcr.io/codbex/codbex-athena-data-sample:latest");
 
     private static final int EXPOSED_PORT = 80;
     static final int RANDOM_PORT = PortUtil.getFreeRandomPort();
