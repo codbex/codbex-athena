@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-public class SalesInvoiceIT extends IntegrationTest {
+public class SalesInvoiceIT extends BaseIntegrationTest {
 
     @BeforeEach
     void setUp() {

@@ -3,7 +3,7 @@ package com.codbex.athena.integration.tests.sample;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class CustomerExistenceIT extends IntegrationTest{
+public class CustomerExistenceIT extends BaseIntegrationTest {
     @BeforeEach
     void setUp() {
         browser.openPath("/");

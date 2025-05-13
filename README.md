@@ -41,6 +41,7 @@ docker run --name "$CONTAINER_NAME" -p 80:80 "$IMAGE"
 ### Manual Steps for Local Testing
 
 ```shell
+cd "$GIT_REPO_FOLDER"
 # build images
 docker build -t codbex-athena:test application/
 docker build -t codbex-athena-data-sample:test application-data-sample/

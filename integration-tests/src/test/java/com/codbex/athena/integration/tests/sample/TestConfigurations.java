@@ -33,7 +33,7 @@ class TestConfigurations {
         PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
 
         Properties props = new Properties();
-        props.put("local.server.port", Integer.toString(IntegrationTest.RANDOM_PORT));
+        props.put("local.server.port", Integer.toString(BaseIntegrationTest.RANDOM_PORT));
         configurer.setProperties(props);
 
         return configurer;
