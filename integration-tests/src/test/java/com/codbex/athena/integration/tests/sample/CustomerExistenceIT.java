@@ -1,17 +1,20 @@
 package com.codbex.athena.integration.tests.sample;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.eclipse.dirigible.tests.framework.browser.HtmlAttribute;
+import org.eclipse.dirigible.tests.framework.browser.HtmlElementType;
 import org.junit.jupiter.api.Test;
 
-public class CustomerExistenceIT extends BaseIntegrationTest {
-    @BeforeEach
-    void setUp() {
-        browser.openPath("/");
-        ide.login(false);
-    }
-
+public class CustomerExistenceIT extends SampleDataIntegrationTest {
     @Test
     void testCustomerDataPopulated() {
-        assert true;
+        browser.openPath("/");
+        ide.login(false);
+
+        browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__navigation-item-text",
+                "Partners");
+        browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__navigation-item-text",
+                "Customers");
+
+        browser.assertElementExistsByTypeAndText(HtmlElementType.DIV, "Betamax");
     }
 }

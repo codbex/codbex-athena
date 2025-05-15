@@ -16,21 +16,17 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.eclipse.dirigible.tests.framework.browser.HtmlAttribute;
 import org.eclipse.dirigible.tests.framework.browser.HtmlElementType;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-public class SalesInvoiceIT extends BaseIntegrationTest {
-
-    @BeforeEach
-    void setUp() {
-        browser.openPath("/");
-        ide.login(false);
-    }
+public class SalesInvoiceIT extends ApplicationIntegrationTest {
 
     @Test
     void testAddingSalesInvoice() {
+        browser.openPath("/");
+        ide.login(false);
+
         createCity();
         ide.reload();
         createCustomer();
