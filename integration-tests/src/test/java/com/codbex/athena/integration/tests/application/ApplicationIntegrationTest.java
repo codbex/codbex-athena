@@ -11,18 +11,13 @@
 package com.codbex.athena.integration.tests.application;
 
 import com.codbex.athena.integration.tests.BaseIntegrationTest;
-import org.junit.jupiter.api.BeforeAll;
+import org.eclipse.dirigible.commons.config.Configuration;
 
-public abstract class ApplicationIntegrationTest extends BaseIntegrationTest {
-
-    @BeforeAll
-    public static void setUpContainer() {
-        testContainer = new ApplicationIntegrationTest() {}.createContainer(System.getProperty("app.image", "ghcr.io/codbex/codbex-athena:latest"));
-        startContainer(testContainer, "Application has started");
-    }
+abstract class ApplicationIntegrationTest extends BaseIntegrationTest {
 
     @Override
-    protected String getTestImage() {
-        return System.getProperty("app.image", "ghcr.io/codbex/codbex-athena:latest");
+    protected final String getTestContainerImage() {
+        return Configuration.get("app.image", "ghcr.io/codbex/codbex-athena:latest");
     }
+
 }

@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-public class SalesInvoiceIT extends ApplicationIntegrationTest {
+class SalesInvoiceIT extends ApplicationIntegrationTest {
 
     @Test
     void testAddingSalesInvoice() {
@@ -29,20 +29,45 @@ public class SalesInvoiceIT extends ApplicationIntegrationTest {
 
         createCity();
         ide.reload();
+
         createCustomer();
         ide.reload();
+
         createEmployee();
         ide.reload();
+
         createSalesInvoice();
     }
 
-    private void enterDateById(String elementId, String date) {
-        SelenideElement dateInput = Selenide.$(Selectors.byId(elementId));
-        dateInput.shouldBe(Condition.visible);
-        dateInput.setValue(date);
+    private void createCity() {
+        browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__navigation-item-text",
+                "Settings");
+        browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__title", "City");
+        browser.clickOnElementWithText(HtmlElementType.BUTTON, "Create");
+
+        browser.enterTextInElementById("idName", "Rome");
+        browser.enterTextInElementById("idCountry", "Italy");
+        browser.clickOnElementByAttributePatternAndText(HtmlElementType.BUTTON, HtmlAttribute.CLASS, "fd-button fd-button--emphasized",
+                "Create");
+
+        browser.assertElementExistsByTypeAndText("p", "City successfully created");
+        browser.clickOnElementWithText(HtmlElementType.BUTTON, "Close");
     }
 
-    private void navigateCreate(String navMenu, String navItem){
+    private void createCustomer() {
+        navigateCreate("Partners", "Customers");
+
+        browser.enterTextInElementById("idName", "CustomerA");
+        browser.enterTextInElementByAttributePattern("textarea", "id", "idAddress", "somewhere");
+        browser.enterTextInElementById("idCountry", "Italy");
+        browser.enterTextInElementById("idEmail", "customera@mail.com");
+        browser.clickOnElementWithText(HtmlElementType.BUTTON, "Create");
+
+        browser.assertElementExistsByTypeAndText("p", "Customer successfully created");
+        browser.clickOnElementWithText(HtmlElementType.BUTTON, "Close");
+    }
+
+    private void navigateCreate(String navMenu, String navItem) {
         browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__navigation-item-text",
                 navMenu);
         browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__navigation-item-text",
@@ -88,31 +113,10 @@ public class SalesInvoiceIT extends ApplicationIntegrationTest {
         browser.clickOnElementWithText(HtmlElementType.BUTTON, "Close");
     }
 
-    private void createCustomer() {
-        navigateCreate("Partners", "Customers");
-
-        browser.enterTextInElementById("idName", "CustomerA");
-        browser.enterTextInElementByAttributePattern("textarea", "id", "idAddress", "somewhere");
-        browser.enterTextInElementById("idCountry", "Italy");
-        browser.enterTextInElementById("idEmail", "customera@mail.com");
-        browser.clickOnElementWithText(HtmlElementType.BUTTON, "Create");
-
-        browser.assertElementExistsByTypeAndText("p", "Customer successfully created");
-        browser.clickOnElementWithText(HtmlElementType.BUTTON, "Close");
+    private void enterDateById(String elementId, String date) {
+        SelenideElement dateInput = Selenide.$(Selectors.byId(elementId));
+        dateInput.shouldBe(Condition.visible);
+        dateInput.setValue(date);
     }
 
-    private void createCity() {
-        browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__navigation-item-text",
-                "Settings");
-        browser.clickOnElementByAttributePatternAndText(HtmlElementType.SPAN, HtmlAttribute.CLASS, "fd-list__title", "City");
-        browser.clickOnElementWithText(HtmlElementType.BUTTON, "Create");
-
-        browser.enterTextInElementById("idName", "Rome");
-        browser.enterTextInElementById("idCountry", "Italy");
-        browser.clickOnElementByAttributePatternAndText(HtmlElementType.BUTTON, HtmlAttribute.CLASS, "fd-button fd-button--emphasized",
-                "Create");
-
-        browser.assertElementExistsByTypeAndText("p", "City successfully created");
-        browser.clickOnElementWithText(HtmlElementType.BUTTON, "Close");
-    }
 }

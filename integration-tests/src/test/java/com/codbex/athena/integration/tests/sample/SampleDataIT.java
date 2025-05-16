@@ -4,7 +4,8 @@ import org.eclipse.dirigible.tests.framework.browser.HtmlAttribute;
 import org.eclipse.dirigible.tests.framework.browser.HtmlElementType;
 import org.junit.jupiter.api.Test;
 
-public class CustomerExistenceIT extends SampleDataIntegrationTest {
+class SampleDataIT extends SampleDataIntegrationTest {
+
     @Test
     void testCustomerDataPopulated() {
         browser.openPath("/");
