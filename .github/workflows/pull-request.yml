@@ -18,7 +18,7 @@ jobs:
     secrets: inherit
 
   application-data-sample:
-    uses: codbex/codbex-infra/.github/workflows/application-pull-request.yaml@feat/main
+    uses: codbex/codbex-infra/.github/workflows/application-pull-request.yaml@main
     with:
       application-name: codbex-athena-data-sample
       install-dependencies: true
