@@ -27,7 +27,6 @@ class SalesInvoiceIT extends ApplicationIntegrationTest {
         browser.openPath("/");
         ide.login(false);
 
-        // TODO: remove the reload once https://github.com/eclipse-dirigible/dirigible/issues/5032 is fixed
         createCity();
 
         createCustomer();
