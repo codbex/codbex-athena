@@ -12,14 +12,20 @@ jobs:
       application-name: codbex-athena
       install-dependencies: true
       dockerfile-location: application/
+      run-tests: true
+      tests-package: '*.tests.application.*IT'
     secrets: inherit
+
   application-data-sample:
     uses: codbex/codbex-infra/.github/workflows/application-build.yaml@main
     with:
       application-name: codbex-athena-data-sample
       install-dependencies: true
       dockerfile-location: application-data-sample/
+      run-tests: true
+      tests-package: '*.tests.sample.*IT'
     secrets: inherit
+
   deploy:
     needs: [application, application-data-sample]
     uses: ./.github/workflows/deploy.yaml

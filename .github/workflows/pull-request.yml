@@ -2,7 +2,7 @@ name: Pull Request - Application
 
 on:
   pull_request:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -12,11 +12,18 @@ jobs:
       application-name: codbex-athena
       install-dependencies: true
       dockerfile-location: application/
+      run-tests: true
+      tests-package: '*.tests.application.*IT'
+      image-property-name: 'app.image'
     secrets: inherit
+
   application-data-sample:
     uses: codbex/codbex-infra/.github/workflows/application-pull-request.yaml@main
     with:
       application-name: codbex-athena-data-sample
       install-dependencies: true
       dockerfile-location: application-data-sample/
+      run-tests: true
+      tests-package: '*.tests.sample.*IT'
+      image-property-name: 'sample.image'
     secrets: inherit
