@@ -10,6 +10,10 @@
         "@codbex/codbex-payment-invoice-ext": "0.2.0",
         "@codbex/codbex-number-generator": "0.4.0",
         "@codbex/codbex-number-generator-data": "0.4.1",
-        "@codbex/codbex-navigation-groups": "0.3.0"
+        "@codbex/codbex-navigation-groups": "0.3.0",
+        "@codbex/codbex-currencies-data": "1.0.0",
+        "@codbex/codbex-methods-data": "1.0.0",
+        "@codbex/codbex-countries-data": "1.0.0",
+        "@codbex/codbex-cities-data": "1.0.0",
     }
 }
