@@ -8,6 +8,30 @@
             "branch": "main"
         },
         {
+            "guid": "codbex-currencies-data",
+            "type": "git",
+            "url": "https://github.com/codbex/codbex-currencies-data.git",
+            "branch": "main"
+        },
+         {
+            "guid": "codbex-methods-data",
+            "type": "git",
+            "url": "https://github.com/codbex/codbex-methods-data.git",
+            "branch": "main"
+        },
+         {
+            "guid": "codbex-cities-data",
+            "type": "git",
+            "url": "https://github.com/codbex/codbex-cities-data.git",
+            "branch": "main"
+        },
+         {
+            "guid": "codbex-countries-data",
+            "type": "git",
+            "url": "https://github.com/codbex/codbex-countries-data.git",
+            "branch": "main"
+        },
+        {
             "guid": "codbex-invoices",
             "type": "git",
             "url": "https://github.com/codbex/codbex-invoices.git",
