@@ -31,7 +31,8 @@
 
     <properties>
         <project.title>Athena by codbex</project.title>
-
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <scmVersionType>branch</scmVersionType>
         <profile.content.phase>none</profile.content.phase>
     </properties>
