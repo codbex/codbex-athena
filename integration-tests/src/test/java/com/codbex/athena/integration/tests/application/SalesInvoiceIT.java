@@ -14,8 +14,8 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import org.eclipse.dirigible.tests.framework.browser.HtmlAttribute;
 import org.eclipse.dirigible.tests.framework.browser.HtmlElementType;
+import org.eclipse.dirigible.tests.framework.browser.HtmlAttribute;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
