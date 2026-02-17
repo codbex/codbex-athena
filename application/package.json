@@ -15,6 +15,6 @@
         "@codbex/codbex-methods-data": "1.0.0",
         "@codbex/codbex-countries-data": "1.0.0",
         "@codbex/codbex-cities-data": "1.0.0",
-        "@codbex/codbex-uoms-data": "1.0.0"
+        "@codbex/codbex-uoms-data": "1.1.0"
     }
 }
