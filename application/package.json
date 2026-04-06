@@ -4,21 +4,21 @@
    },
     "dependencies": {
         "@codbex/codbex-accounts": "^0.4.0",
-        "@codbex/codbex-invoices": "^0.9.4",
-        "@codbex/codbex-payments": "^0.9.0",
-        "@codbex/codbex-payment-invoice-ext": "^0.2.0",
-        "@codbex/codbex-number-generator": "^1.1.0",
-        "@codbex/codbex-number-generator-data": "^1.0.0",
-        "@codbex/codbex-navigation-groups": "^0.3.0",
-        "@codbex/codbex-athena-data-sample": "^0.3.0",
-        "@codbex/codbex-currencies-data": "^1.2.0",
-        "@codbex/codbex-methods-data": "^1.1.0",
-        "@codbex/codbex-countries-data": "^1.1.0",
-        "@codbex/codbex-cities-data": "^1.1.0",
-        "@codbex/codbex-uoms-data": "^1.2.0",
-        "@codbex/codbex-partners-data": "^1.0.0",
-        "@codbex/codbex-invoices-data": "^1.0.0",
-        "@codbex/codbex-payments-data": "^1.0.0",
-        "@codbex/codbex-employees-data": "^1.0.0"
-    }
+        "@codbex/codbex-invoices": "^0.9.4",
+        "@codbex/codbex-payments": "^0.9.0",
+        "@codbex/codbex-payment-invoice-ext": "^0.2.0",
+        "@codbex/codbex-number-generator": "^1.1.0",
+        "@codbex/codbex-number-generator-data": "^1.0.0",
+        "@codbex/codbex-navigation-groups": "^0.3.0",
+        "@codbex/codbex-athena-data-sample": "^0.3.0",
+        "@codbex/codbex-currencies-data": "^1.2.0",
+        "@codbex/codbex-methods-data": "^1.1.0",
+        "@codbex/codbex-countries-data": "^1.1.0",
+        "@codbex/codbex-cities-data": "^1.1.0",
+        "@codbex/codbex-uoms-data": "^1.2.0",
+        "@codbex/codbex-partners-data": "^1.0.0",
+        "@codbex/codbex-invoices-data": "^1.0.0",
+        "@codbex/codbex-payments-data": "^1.0.0",
+        "@codbex/codbex-employees-data": "^1.0.0"
+   }
 }
