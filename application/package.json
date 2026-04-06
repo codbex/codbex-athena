@@ -1,7 +1,7 @@
 {
-    "scripts": {
+  "scripts": {
         "login": "npm login --scope=@codbex --auth-type=legacy --registry=https://npm.pkg.github.com"
-    },
+  },
     "dependencies": {
        "@codbex/codbex-accounts": "^0.4.0",
         "@codbex/codbex-invoices": "^0.9.4",
