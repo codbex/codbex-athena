@@ -1,4 +1,10 @@
 {
+   "name": "@codbex/codbex-athena",
+    "version": "1.10.0",
+    "repository": {
+        "url": "https://github.com/codbex/codbex-athena.git",
+        "type": "git"
+    },
     "scripts": {
         "login": "npm login --scope=@codbex --auth-type=legacy --registry=https://npm.pkg.github.com"
     },
