@@ -4,7 +4,7 @@
    },
     "dependencies": {
         "@codbex/codbex-accounts": "^1.0.0",
-        "@codbex/codbex-invoices": "^1.0.0",
+        "@codbex/codbex-invoices": "^1.1.0",
         "@codbex/codbex-payments": "^1.0.0",
         "@codbex/codbex-payment-invoice-ext": "^0.2.0",
         "@codbex/codbex-number-generator": "^1.1.0",
