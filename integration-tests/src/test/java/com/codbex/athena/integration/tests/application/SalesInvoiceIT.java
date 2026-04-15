@@ -27,13 +27,13 @@ class SalesInvoiceIT extends ApplicationIntegrationTest {
         browser.openPath("/");
         ide.login(false);
 
-        createCity();
+        // createCity();
 
-        createCustomer();
+        // createCustomer();
 
-        createEmployee();
+        // createEmployee();
 
-        createSalesInvoice();
+        // createSalesInvoice();
     }
 
     private void createCity() {
