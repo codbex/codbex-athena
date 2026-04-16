@@ -69,3 +69,4 @@ When running this project inside the codbex Atlas Docker image, you must provide
 - The `NPM_TOKEN` must be available at container runtime.
 - This is required even for public packages hosted on GitHub Packages.
 - Never bake the token into the Docker image or commit it to source control.
+
