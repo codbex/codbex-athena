@@ -18,6 +18,6 @@
         "@codbex/codbex-invoices-data": "^1.1.0",
         "@codbex/codbex-payments-data": "^1.1.0",
         "@codbex/codbex-employees-data": "^1.1.0",
-        "@codbex/codbex-accounts-data": "^1.0.0"
+        "@codbex/codbex-accounts-data": "^1.1.0"
    }
 }
