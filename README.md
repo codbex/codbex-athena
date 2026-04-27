@@ -1,6 +1,11 @@
-# codbex-athena
+# <img src="https://www.codbex.com/icon.svg" width="32" style="vertical-align: middle;"> codbex-athena
 
 Accounting Management Application
+
+## 📖 Table of Contents
+* [📦 Run Athena Docker image locally](#-run-athena-docker-image-locally)
+* [🐳 Local Development with Docker](#-local-development-with-docker)
+
 
 ## Run Athena Docker image locally
 
