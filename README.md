@@ -6,8 +6,7 @@ Accounting Management Application
 * [📦 Run Athena Docker image locally](#-run-athena-docker-image-locally)
 * [🐳 Local Development with Docker](#-local-development-with-docker)
 
-
-## Run Athena Docker image locally
+## 📦 Run Athena Docker image locally
 
 ### Prerequisites
 
@@ -57,7 +56,7 @@ mvn clean install -P integration-tests \
   -DSAMPLE_DATA_IMAGE=codbex-athena-data-sample:test
 ```
 
-## Local Development with Docker
+## 🐳 Local Development with Docker
 
 When running this project inside the codbex Atlas Docker image, you must provide authentication for installing dependencies from GitHub Packages.
 1. Create a GitHub Personal Access Token (PAT) with `read:packages` scope.
